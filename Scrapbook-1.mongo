@@ -1,0 +1,10 @@
+{
+  "_id": {
+    "$oid": "61f92323f7e2208e413fc68f"
+  },
+  "name": " 寵物專業護理洗毛精",
+  "price": "500",
+  "description": "貓咪專用",
+  "image": "https://res.cloudinary.com/datueqlsb/image/upload/v1643717409/hncpusc71psqztv6dsig.jpg",
+  "sell": true
+}
