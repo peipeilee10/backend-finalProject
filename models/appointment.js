@@ -38,12 +38,12 @@ const appointmentSchema = new mongoose.Schema({
         values: ['小型犬', '中型犬', '大型犬', '短毛', '長毛']
       }
     },
-    petName: {
+    petname: {
       type: String,
       default: ''
     },
     petbreed: {
-      String,
+      type: String,
       default: ''
     },
     serviceitem: {

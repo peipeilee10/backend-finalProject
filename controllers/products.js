@@ -2,6 +2,7 @@ import products from '../models/products.js'
 
 // 增加商品
 export const createProducts = async (req, res) => {
+  console.log(req.body)
   try {
     const result = await products.create({ ...req.body, image: req.file.path })
     res.status(200).send({ success: true, message: '', result })
@@ -48,7 +49,7 @@ export const updateProductById = async (req, res) => {
 export const getAllProducts = async (req, res) => {
   try {
     const result = await products.find()
-    console.log(result)
+    // console.log(result)
     res.status(200).send({ success: true, message: '', result })
   } catch (error) {
     console.log('getAllProducts拿取所有商品失敗')
