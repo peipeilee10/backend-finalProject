@@ -2,72 +2,85 @@ import mongoose from 'mongoose'
 import md5 from 'md5'
 import validator from 'validator'
 
-const userSchema = new mongoose.Schema({
-  account: {
-    type: String,
-    minlength: [4, '帳號字數需介於4-10個字'],
-    maxlength: [10, '帳號字數需介於4-10個字'],
-    unique: true,
-    required: [true, '帳號為必填欄位']
-  },
-  password: {
-    type: String,
-    minlength: [4, '密碼字數不得小於4個字'],
-    required: [true, '密碼為必填欄位']
-  },
-  email: {
-    type: String,
-    validator: {
-      validator (email) {
-        if (email.length === 0) return true
-        return validator.isEmail(email)
-      },
-      message: '信箱格式不正確'
+const userSchema = new mongoose.Schema(
+  {
+    account: {
+      type: String,
+      minlength: [4, '帳號字數需介於4-10個字'],
+      maxlength: [10, '帳號字數需介於4-10個字'],
+      unique: true,
+      required: [true, '帳號為必填欄位']
     },
-    default: ''
-  },
-  tokens: {
-    type: [String]
-  },
-  role: {
-    // 0 一般會員  1管理員
-    type: Number,
-    default: 0
-  },
-  name: {
-    type: String,
-    default: ''
-  },
-  address: {
-    type: String,
-    default: ''
-  },
-  phone: {
-    type: String,
-    default: '',
-    validator: {
-      validator (phone) {
-        if (phone.length === 0) return true
-        return validator.isMobilePhone(phone, 'zh-TW')
-      }
-    }
-  },
-  cart: {
-    type: [
-      {
-        product: {
-          type: mongoose.ObjectId,
-          ref: 'products',
-          required: [true, '缺少商品ID']
+    password: {
+      type: String,
+      minlength: [4, '密碼字數不得小於4個字'],
+      required: [true, '密碼為必填欄位']
+    },
+    email: {
+      type: String,
+      validator: {
+        validator (email) {
+          if (email.length === 0) return true
+          return validator.isEmail(email)
         },
-        quantity: {
-          type: Number,
-          required: [true, '缺少商品數量']
+        message: '信箱格式不正確'
+      },
+      default: ''
+    },
+    tokens: {
+      type: [String]
+    },
+    role: {
+      // 0 一般會員  1管理員
+      type: Number,
+      default: 0
+    },
+    name: {
+      type: String,
+      default: ''
+    },
+    address: {
+      type: String,
+      default: ''
+    },
+    phone: {
+      type: String,
+      default: '',
+      validator: {
+        validator (phone) {
+          if (phone.length === 0) return true
+          return validator.isMobilePhone(phone, 'zh-TW')
         }
       }
-    ]
-  }
-}, { versionKey: false })
+    },
+    cart: {
+      type: [
+        {
+          product: {
+            type: mongoose.ObjectId,
+            ref: 'products',
+            required: [true, '缺少商品ID']
+          },
+          quantity: {
+            type: Number,
+            required: [true, '缺少商品數量']
+          }
+        }
+      ]
+    },
+    appointmentCheckout: {
+      type: [
+        {
+          appointment: {
+            type: mongoose.ObjectId,
+            ref: 'appointment'
+          }
+        }
+      ]
+    }
+  },
+  { versionKey: false }
+)
 
 // 儲存前加密密碼
 userSchema.pre('save', function (next) {
