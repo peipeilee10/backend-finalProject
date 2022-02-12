@@ -61,11 +61,12 @@ export const checkout = async (req, res) => {
   }
 }
 
+// 拿自己的訂單
 export const getMyOrders = async (req, res) => {
   console.log('getMyOrders')
   try {
     const result = await orders.find({ userId: req.user._id }).populate('products.product')
-    res.status(200).send({ success: false, message: '', result })
+    res.status(200).send({ success: true, message: '', result })
     console.log(result)
   } catch (error) {
     console.log('getMyOrders錯誤')
@@ -73,6 +74,7 @@ export const getMyOrders = async (req, res) => {
   }
 }
 
+// 管理員拿所有人的訂單
 export const getAllOrders = async (req, res) => {
   try {
     const result = await orders.find().populate('products.product')

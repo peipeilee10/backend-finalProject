@@ -1,14 +1,16 @@
 import appointment from '../models/appointment.js'
 // import users from '../models/users.js'
 
-// 預約
+// 新增預約
 export const appointmentcheckout = async (req, res) => {
-  // console.log(req.user)
-  console.log('req.body' + req.body)
+  console.log(req.user)
+  console.log(req.body)
   try {
     const result = await appointment.create({ userId: req.user._id, appointment: req.body })
     console.log('result' + result)
+    // console.log(req.user)
     await req.user.save()
+    console.log('123')
     res.status(200).send({ success: true, message: '', result })
   } catch (error) {
     console.log('appointmentcheckout 錯誤')
@@ -23,10 +25,27 @@ export const appointmentcheckout = async (req, res) => {
   }
 }
 
+// 拿到自己的預約
 export const getMyappointment = async (req, res) => {
-
+  console.log(req.user)
+  try {
+    const result = await appointment.find({ userId: req.user._id })
+    res.status(200).send({ success: true, message: '', result })
+    console.log(result)
+  } catch (error) {
+    console.log('getMyappointment錯誤')
+    res.status(500).send({ success: false, message: '伺服器錯誤' })
+  }
 }
 
 export const getAllappointment = async (req, res) => {
-
+  // console.log(req.user)
+  try {
+    const result = await appointment.find()
+    // console.log(result)
+    res.status(200).send({ success: true, message: '', result })
+  } catch (error) {
+    console.log('getAllappointment錯誤')
+    res.status(500).send({ success: false, message: '伺服器錯誤' })
+  }
 }

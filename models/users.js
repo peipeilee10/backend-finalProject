@@ -73,7 +73,7 @@ const userSchema = new mongoose.Schema(
         {
           appointment: {
             type: mongoose.ObjectId,
-            ref: 'appointment'
+            ref: 'appointments'
           }
         }
       ]
