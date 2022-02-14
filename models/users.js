@@ -67,16 +67,6 @@ const userSchema = new mongoose.Schema(
           }
         }
       ]
-    },
-    appointmentCheckout: {
-      type: [
-        {
-          appointment: {
-            type: mongoose.ObjectId,
-            ref: 'appointments'
-          }
-        }
-      ]
     }
   },
   { versionKey: false }

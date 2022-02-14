@@ -3,14 +3,13 @@ import appointment from '../models/appointment.js'
 
 // 新增預約
 export const appointmentcheckout = async (req, res) => {
-  console.log(req.user)
+  // console.log(req.user)
   console.log(req.body)
   try {
     const result = await appointment.create({ userId: req.user._id, appointment: req.body })
     console.log('result' + result)
-    // console.log(req.user)
     await req.user.save()
-    console.log('123')
+    // console.log('123')
     res.status(200).send({ success: true, message: '', result })
   } catch (error) {
     console.log('appointmentcheckout 錯誤')

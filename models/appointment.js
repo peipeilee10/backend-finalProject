@@ -1,66 +1,73 @@
 import mongoose from 'mongoose'
 import validator from 'validator'
 
-const appointmentSchema = new mongoose.Schema({
-  userId: {
-    type: mongoose.ObjectId,
-    ref: 'users'
-  },
-  appointment: {
-    name: {
-      type: String,
-      default: ''
+const appointmentSchema = new mongoose.Schema(
+  {
+    userId: {
+      type: mongoose.ObjectId,
+      ref: 'users'
     },
-    email: {
-      type: String,
-      validator: {
-        validator (email) {
-          if (email.length === 0) return true
-          return validator.isEmail(email)
-        },
-        message: '信箱格式不正確'
+    appointment: {
+      name: {
+        type: String,
+        default: ''
       },
-      default: ''
-    },
-    phone: {
-      type: String,
-      default: '',
-      validator: {
-        validator (phone) {
-          if (phone.length === 0) return true
-          return validator.isMobilePhone(phone, 'zh-TW')
+      email: {
+        type: String,
+        validator: {
+          validator (email) {
+            if (email.length === 0) return true
+            return validator.isEmail(email)
+          },
+          message: '信箱格式不正確'
+        },
+        default: ''
+      },
+      phone: {
+        type: String,
+        default: '',
+        validator: {
+          validator (phone) {
+            if (phone.length === 0) return true
+            return validator.isMobilePhone(phone, 'zh-TW')
+          }
         }
+      },
+      pettype: {
+        type: String,
+        enum: {
+          values: ['小型犬', '中型犬', '大型犬', '短毛貓', '長毛貓']
+        }
+      },
+      petname: {
+        type: String,
+        default: ''
+      },
+      petbreed: {
+        type: String,
+        default: ''
+      },
+      serviceitem: {
+        type: String,
+        enum: {
+          values: ['小美容', '大美容']
+        }
+      },
+      appointmentdate: {
+        type: String,
+        default: ''
+      },
+      appointmenttime: {
+        type: String,
+        default: ''
+      },
+      memo: {
+        type: String,
+        default: ''
       }
-    },
-    pettype: {
-      type: String,
-      enum: {
-        values: ['小型犬', '中型犬', '大型犬', '短毛', '長毛']
-      }
-    },
-    petname: {
-      type: String,
-      default: ''
-    },
-    petbreed: {
-      type: String,
-      default: ''
-    },
-    serviceitem: {
-      type: String,
-      enum: {
-        values: ['小美容', '大美容']
-      }
-    },
-    appointmentdate: {
-      type: String,
-      default: ''
-    },
-    appointmenttime: {
-      type: String,
-      default: ''
     }
-  }
-}, { versionKey: false })
+  },
+  { versionKey: false }
+)
 
 export default mongoose.model('appointments', appointmentSchema)
