@@ -13,7 +13,7 @@ cloudinary.config({
 const upload = multer({
   storage: new CloudinaryStorage({ cloudinary }),
   // 限制檔案類型
-  fileFilter (req, file, cb) {
+  fileFilter(req, file, cb) {
     if (!file.mimetype.includes('image')) {
       // 觸發自訂的 LIMIT_FILE_FORMAT 錯誤
       cb(new multer.MulterError('LIMIT_FILE_FOTMAT'), false)

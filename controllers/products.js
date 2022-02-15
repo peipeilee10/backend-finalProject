@@ -5,6 +5,7 @@ export const createProducts = async (req, res) => {
   console.log(req.body)
   try {
     const result = await products.create({ ...req.body, image: req.file.path })
+    console.log(result)
     res.status(200).send({ success: true, message: '', result })
   } catch (error) {
     console.log('createProducts商品新增錯誤')

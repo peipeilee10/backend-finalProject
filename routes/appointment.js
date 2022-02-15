@@ -6,7 +6,8 @@ import admin from '../middleware/admin.js'
 import {
   appointmentcheckout,
   getMyappointment,
-  getAllappointment
+  getAllappointment,
+  deletappointment
 } from '../controllers/appointment.js'
 
 const router = express.Router()
@@ -17,5 +18,7 @@ router.post('/', content('application/json'), auth, appointmentcheckout)
 router.get('/myappointment', auth, getMyappointment)
 // 管理者拿全部的預約紀錄
 router.get('/allappointment', auth, admin, getAllappointment)
+// 取消預約
+router.delete('/deleteappointment/:id', auth, deletappointment)
 
 export default router

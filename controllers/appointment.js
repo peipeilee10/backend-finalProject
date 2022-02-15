@@ -37,6 +37,7 @@ export const getMyappointment = async (req, res) => {
   }
 }
 
+// 拿取所有預約
 export const getAllappointment = async (req, res) => {
   // console.log(req.user)
   try {
@@ -46,5 +47,21 @@ export const getAllappointment = async (req, res) => {
   } catch (error) {
     console.log('getAllappointment錯誤')
     res.status(500).send({ success: false, message: '伺服器錯誤' })
+  }
+}
+
+// 刪除預約
+export const deletappointment = async (req, res) => {
+  console.log('刪除預約deletappointment')
+  try {
+    await appointment.findByIdAndDelete(req.params.id)
+    res.status(200).send({ success: true, message: '' })
+  } catch (error) {
+    console.log('deletappointment刪除預約錯誤')
+    if (error.name === 'CastError') {
+      res.status(404).send({ success: false, message: '找不到商品' })
+    } else {
+      res.status(500).send({ success: false, message: '伺服器錯誤' })
+    }
   }
 }
