@@ -15,7 +15,7 @@ const orderSchema = new mongoose.Schema(
       email: {
         type: String,
         validator: {
-          validator(email) {
+          validator (email) {
             if (email.length === 0) return true
             return validator.isEmail(email)
           },
@@ -27,7 +27,7 @@ const orderSchema = new mongoose.Schema(
         type: String,
         default: '',
         validator: {
-          validator(phone) {
+          validator (phone) {
             if (phone.length === 0) return true
             return validator.isMobilePhone(phone, 'zh-TW')
           }
