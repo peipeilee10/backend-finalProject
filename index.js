@@ -6,6 +6,7 @@ import usersRoute from './routes/users.js'
 import productsRoute from './routes/products.js'
 import ordersRoute from './routes/orders.js'
 import appointmentRoute from './routes/appointment.js'
+import pagesRoute from './routes/pages.js'
 
 mongoose.connect(process.env.DB_URL, () => {
   console.log('MongoDB Connected')
@@ -43,6 +44,7 @@ app.use('/users', usersRoute)
 app.use('/products', productsRoute)
 app.use('/orders', ordersRoute)
 app.use('/appointments', appointmentRoute)
+app.use('/pages', pagesRoute)
 
 // 上面的錯誤都不符合
 app.all('*', (req, res) => {

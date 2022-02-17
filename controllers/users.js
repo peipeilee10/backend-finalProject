@@ -97,7 +97,7 @@ export const updateInfo = async (req, res) => {
       res.status(404).send({ success: false, message: '找不到使用者' })
     }
   } catch (error) {
-    console.log('addCart錯誤')
+    console.log('updateInfo錯誤')
     if (error.name === 'CastError') {
       res.status(404).send({ success: false, message: '找不到' })
     } else if (error.name === 'ValidationError') {
