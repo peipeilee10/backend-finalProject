@@ -23,13 +23,14 @@ const upload = multer({
   },
   limits: {
     // 限制檔案1MB
-    fileSize: 1024 * 1024
+    fileSize: 2 * 1024 * 1024
   }
 })
 
 export default async (req, res, next) => {
   upload.single('image')(req, res, async error => {
     // 是否為上傳錯誤
+    console.log(error)
     if (error instanceof multer.MulterError) {
       let message = '上傳錯誤'
       if (error.code === 'LIMIT_FILE_FOTMAT') {

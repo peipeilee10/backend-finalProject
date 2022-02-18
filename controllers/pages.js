@@ -3,7 +3,6 @@ import pages from '../models/pages.js'
 // 新增輪播圖圖片
 export const uploadCarouselImg = async (req, res) => {
   try {
-    console.log('123')
     console.log(req.body)
     const result = await pages.create({ carouselImage: req.file.path })
     res.status(200).send({ success: true, message: '', result })

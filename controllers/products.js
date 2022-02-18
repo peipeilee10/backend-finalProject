@@ -1,4 +1,5 @@
 import products from '../models/products.js'
+import users from '../models/users.js'
 
 // 增加商品
 export const createProducts = async (req, res) => {
@@ -63,6 +64,13 @@ export const deleteProduct = async (req, res) => {
   console.log('刪除商品controller')
   try {
     await products.findByIdAndDelete(req.params.id)
+    await users.find({
+      $pull: {
+        cart: {
+          _id: req.params._id
+        }
+      }
+    })
     res.status(200).send({ success: true, message: '' })
   } catch (error) {
     console.log('deleteProduct刪除商品錯誤')
