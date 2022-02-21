@@ -12,7 +12,6 @@ import {
   addCart,
   getCart,
   updateCart
-
 } from '../controllers/users.js'
 
 const router = express.Router()
