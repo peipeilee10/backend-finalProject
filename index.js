@@ -18,7 +18,13 @@ const app = express()
 app.use(
   cors({
     origin (origin, cb) {
-      if (origin === undefined || origin.includes('github') || origin.includes('localhost')) {
+      console.log(origin)
+      if (
+        origin === undefined ||
+        origin.includes('github') ||
+        origin.includes('localhost') ||
+        origin.includes('192.168')
+      ) {
         cb(null, true)
       } else {
         cb(new Error('Not allowed'), false)
