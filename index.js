@@ -17,7 +17,7 @@ const app = express()
 // 允許前端cors請求
 app.use(
   cors({
-    origin (origin, cb) {
+    origin(origin, cb) {
       console.log(origin)
       if (
         origin === undefined ||
