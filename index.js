@@ -23,7 +23,8 @@ app.use(
         origin === undefined ||
         origin.includes('github') ||
         origin.includes('localhost') ||
-        origin.includes('192.168')
+        origin.includes('192.168') ||
+        origin.includes('172.20')
       ) {
         cb(null, true)
       } else {
